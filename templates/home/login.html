@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% if page == 'login' %}
+      <div class="login">
+        <form method="POST" action="" >
+        {% csrf_token %}
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email address</label>
+              <input type="text" class="form-control" id="exampleInputEmail1" name="username" aria-describedby="emailHelp">
+              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Password</label>
+              <input type="password" class="form-control" name="password" id="exampleInputPassword1">
+            </div>
+          
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        
+      
+        <p>havent signed up yet</p>
+        <a href="{% url 'register' %}">Sign up</a>
+        </div>
+            {% else %}
+        <div>
+        <form method="POST" action="" >
+          {% csrf_token %}
+              {{form.as_p}}
+            
+              <button type="submit" class="btn btn-primary">register</button>
+            </form>
+          
+            <p>havent signed up yet</p>
+            <a href="{% url 'login' %}">Sign in</a>
+        </div>
+        {% endif %}>
+</body>
+</html>

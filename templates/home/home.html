@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home
+    </title>
+</head>
+<body>
+    <h1>Articles</h1>
+    {% for n in notes %}
+
+    <ul>
+       <H1>{{n.Title}}</H1>
+       <h2>{{n.abstract}}</h2>
+       
+    </ul>
+    <h2>comments
+    </h2>
+    {% for c in n.comments %}
+    <h4>{{c.author}}</h4>
+    <h4>{{c.content}}</h4>
+    <div style="position: relative;left: 50px;">
+    <h3>replies</h3>
+    {% for r in c.replies %}
+    <h4>{{r.author}}</h4>
+    <h4>{{r.content}}</h4>
+    {% endfor %}</div>
+    {% endfor %}
+    {% endfor %}
+</body>
+</html>
