@@ -5,6 +5,8 @@ urlpatterns = [
     path("login",views.loginpage,name='login'),
     path("register",views.registeruser,name='register'),
     path("logout",views.logoutuser,name='logout'),
-    path("home",views.home,name="home")
+    path("home",views.home,name="home"),
+    path("comment/",views.comments,name="comment"),
+    path("reply/",views.reply,name='reply')
 
 ]

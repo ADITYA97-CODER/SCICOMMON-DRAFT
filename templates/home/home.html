@@ -17,6 +17,12 @@
        
     </ul>
     <h2>comments
+        <form action="/comment/?pk={{n.id}}" method="post" enctype = "multipart/form-data">
+
+            {% csrf_token %}
+            <input type="text" id="comment" name="comment">
+            <button type="submit">submit</button>
+        </form>
     </h2>
     {% for c in n.comments %}
     <h4>{{c.author}}</h4>
@@ -26,6 +32,12 @@
     {% for r in c.replies %}
     <h4>{{r.author}}</h4>
     <h4>{{r.content}}</h4>
+    <form action="/reply/?pk={{n.id}}&cid={{c.id}}" method="post" enctype = "multipart/form-data">
+
+        {% csrf_token %}
+        <input type="text"  name="reply">
+        <button type="submit">submit</button>
+    </form>
     {% endfor %}</div>
     {% endfor %}
     {% endfor %}

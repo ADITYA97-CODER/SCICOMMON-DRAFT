@@ -57,8 +57,8 @@ def home(request):
      for comment in comments:
         if comment.parent_comment is None:
          replies = comment.replies.all()
-         c.append({"author":comment.author,"content":comment.content,"replies":replies})
-     N = {'Title':search_results.content['title'],"abstract":search_results.content['abstract'],"comments":c}
+         c.append({"author":comment.author,"content":comment.content,"replies":replies,"id":comment.id})
+     N = {'Title':search_results.content['title'],"abstract":search_results.content['abstract'],"comments":c,"id":note.note_id}
      n.append(N)    
 
 
@@ -68,3 +68,26 @@ def home(request):
     # Render the homepage template with the list of articles
     context = {"notes":n}
     return render(request, 'home.html', context)
+def comments(request):
+   id = request.GET.get('pk')
+   if request.method=='POST':
+      com = request.POST.get('comment')
+      c = comment()
+      c.author=request.user
+      c.content= com
+      c.note= Note.objects.get(note_id  = id)
+      c.save()
+   return redirect('home')
+def reply(request):
+   id = request.GET.get('pk')
+   comment__id = request.GET.get('cid')
+   if request.method=='POST':
+      com = request.POST.get('reply')
+      c = comment()
+      c.author=request.user
+      c.content= com
+      c.note= Note.objects.get(note_id  = id)
+      c.parent_comment = comment.objects.get(id = comment__id)
+      c.save()
+   return redirect('home')
+ 
